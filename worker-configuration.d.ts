@@ -3,6 +3,8 @@
 declare namespace Cloudflare {
 	interface Env {
 		VALUE_FROM_CLOUDFLARE: "Hello from Cloudflare";
+		SUPABASE_URL:"";
+		SUPABASE_KEY:"";
 	}
 }
 interface Env extends Cloudflare.Env {}

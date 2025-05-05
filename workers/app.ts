@@ -1,4 +1,5 @@
 import { createRequestHandler } from "react-router";
+import { createClient } from '@supabase/supabase-js';
 
 declare module "react-router" {
   export interface AppLoadContext {
@@ -16,6 +17,10 @@ const requestHandler = createRequestHandler(
 
 export default {
   async fetch(request, env, ctx) {
+    const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);
+    const { data, error } = await supabase.from("sales_deals").select('*');
+    ctx.props.data = data
+    ctx.props.error = error
     return requestHandler(request, {
       cloudflare: { env, ctx },
     });
